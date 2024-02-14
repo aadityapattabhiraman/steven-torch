@@ -61,3 +61,16 @@ x2 = torch.rand((1, 5))
 
 z = x1 - x2
 z = x1 ** x2
+
+# other operations
+sum_x = torch.sum(x, dim=0)
+values, indices = torch.max(x, dim=0)
+values, indices = torch.min(x, dim=0)
+abs_x = torch.abs(x)
+z = torch.argmax(x, dim=0)
+z = torch.argmin(x, dim=0)
+mean_x = torch.mean(x.float(), dim=0)
+z = torch.eq(x, y)
+sorted_y, indices = torch.sort(y, dim=0, descending=False)
+
+z = torch.clamp(x, min=0, max=10)
