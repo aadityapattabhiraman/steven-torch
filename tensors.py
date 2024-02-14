@@ -19,3 +19,14 @@ print(points[0, 1])
 
 
 # squeeze abd unsqueeze
+points_64 = torch.rand(5, dtype=torch.double)
+print(points_64)
+
+a = torch.ones(3, 2)
+a_t = torch.transpose(a, 0, 1)
+a_t = a.transpose(0, 1)
+print(a.shape, a_t.shape)
+
+# .storage()
+
+# .zero_()
