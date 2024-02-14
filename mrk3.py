@@ -17,9 +17,7 @@ class Neural_Network(nn.Module):
 		self.layer_2 = nn.Linear(50, num_classes)
 
 	def forward(self, x):
-		x = functional.relu(self.layer_1(x))
-		x = self.layer_2(x)
-		return x
+		return self.layer_2(functional.relu(self.layer_1(x)))
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -75,7 +73,7 @@ def check_accuracy(loader, model):
 		for x, y in loader:
 			x = x.to(device=device)
 			y = y.to(device=device)
-			x = x.reshape(x,shape[0], -1)
+			x = x.reshape(x.shape[0], -1)
 
 			scores = model(x)
 			_, predictions = scores.max(1)
@@ -84,7 +82,7 @@ def check_accuracy(loader, model):
 
 		print(
 			f"Got {num_correct}/{num_samples} with accuracy"
-			f" {float(num_correct)}/float(num_samples) * 100:.2f")
+			f" {float(num_correct)/float(num_samples) * 100:.2f}")
 
 	model.train()
 
