@@ -40,3 +40,24 @@ matrix_exp.matrix_power(3)
 # element wise multiplication
 z = x * y 
 print(z)
+
+# dot product
+z = torch.dot(x, y)
+print(z)
+
+# batch matrix multiplication
+batch = 32
+n = 10
+m = 20
+p = 30
+
+tensor1 = torch.rand((batch, n, m))
+tensor2 = torch.rand((batch, m, p))
+out_bmm = torch.bmm(tensor1, tensor2)
+
+# Broadcasting
+x1 = torch.rand((5, 5))
+x2 = torch.rand((1, 5))
+
+z = x1 - x2
+z = x1 ** x2
