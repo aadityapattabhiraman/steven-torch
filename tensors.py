@@ -30,3 +30,25 @@ print(a.shape, a_t.shape)
 # .storage()
 
 # .zero_()
+
+# .storage_offset(), .stride()
+
+# .clone() subtensor into a new tensor
+
+points = torch.tensor([[4.0, 1.0], [5.0, 3.0], [2.0, 1.0]])
+print(points)
+points_t = points.t()
+print(points_t)
+# transpose of a tensor
+
+# contiguous tensor
+# A tensor whose values are laid out in the storage starting from the rightmost
+# dimension onward
+print(points.is_contiguous())
+
+points = torch.tensor([[4.0, 1.0], [5.0, 3.0], [2.0, 1.0]])
+points_t = points.t()
+points_t_cont = points_t.contiguous()
+
+points_gpu = torch.tensor([[4.0, 1.0], [5.0, 3.0], [2.0, 1.0]], device='cuda')
+points_gpu = points.to(device='cuda')
