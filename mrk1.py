@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -36,3 +37,13 @@ print(x)
 # convert to other datatypes
 tensor = torch.arange(4)
 print(tensor)
+print(tensor.bool())
+# short, long, half, float, double
+
+
+np_array = np.zeros((5, 5))
+print(np_array)
+tensor = torch.from_numpy(np_array)
+print(tensor)
+np_array = tensor.numpy()
+print(np_array)
