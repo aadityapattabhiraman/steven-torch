@@ -20,11 +20,31 @@ class Neural_Network(nn.Module):
 		return self.layer_2(functional.relu(self.layer_1(x)))
 
 
+class Convolutional_Neural_Network(nn.Module):
+	def __init__(self, in_channels=1, num_classes=10):
+		super(Convolutional_Neural_Network, self).__init__()
+		self.conv1 = nn.Conv2d(in_channels=1, out_channels=8, kernel_size=(3, 3),
+							   stride=(1, 1), padding=(1, 1))
+		self.pool = nn.MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
+		self.conv2 = nn.Conv2d(in_channels=8, out_channels=16, kernel_size=(3, 3),
+							   stride=(1, 1), padding=(1, 1))
+		self.layer_1 = nn.Linear(16 * 7 * 7, num_classes)
+
+	def forward(self, x):
+		x = functional.relu(self.conv1(x))
+		x = self.pool(x)
+		x = functional.relu(self.conv2(x))
+		x = self.pool(x)
+		x = x.reshape(x.shape[0], -1)
+		x = self.layer_1(x)
+		return x
+
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-input_size = 784
+in_channel = 1
 num_classes = 10
 learning_rate = 0.001
-num_epochs = 3 
+num_epochs = 5
 
 batch_size = 64
 train_dataset = datasets.MNIST( 
@@ -41,7 +61,7 @@ test_loader = DataLoader(
     dataset=test_dataset, batch_size=batch_size, shuffle=True
 )
 
-model = Neural_Network(input_size=input_size, num_classes=num_classes).to(device)
+model = Convolutional_Neural_Network().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -51,8 +71,6 @@ for epoch in range(num_epochs):
 	for batch_idx, (data, targets) in enumerate(train_loader):
 		data = data.to(device=device)
 		targets = targets.to(device=device)
-
-		data = data.reshape(data.shape[0], -1)
 
 		scores = model(data)
 		loss = criterion(scores, targets)
@@ -73,7 +91,6 @@ def check_accuracy(loader, model):
 		for x, y in loader:
 			x = x.to(device=device)
 			y = y.to(device=device)
-			x = x.reshape(x.shape[0], -1)
 
 			scores = model(x)
 			_, predictions = scores.max(1)
