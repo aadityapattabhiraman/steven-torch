@@ -16,3 +16,6 @@ print(points.shape)
 points = torch.zeros(3, 2)
 print(points)
 print(points[0, 1])
+
+
+# squeeze abd unsqueeze
