@@ -8,18 +8,6 @@ import torchvision.transforms as transforms
 
 
 # hello hello can you hear me
-
-
-class Neural_Network(nn.Module):
-	def __init__(self, input_size, num_classes):
-		super(Neural_Network, self).__init__()
-		self.layer_1 = nn.Linear(input_size, 50)
-		self.layer_2 = nn.Linear(50, num_classes)
-
-	def forward(self, x):
-		return self.layer_2(functional.relu(self.layer_1(x)))
-
-
 class Convolutional_Neural_Network(nn.Module):
 	def __init__(self, in_channels=1, num_classes=10):
 		super(Convolutional_Neural_Network, self).__init__()
