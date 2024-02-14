@@ -74,3 +74,8 @@ z = torch.eq(x, y)
 sorted_y, indices = torch.sort(y, dim=0, descending=False)
 
 z = torch.clamp(x, min=0, max=10)
+
+x = torch.tensor([1, 0, 1, 1, 1, 1], dtype=torch.bool)
+z = torch.any(x)
+print(z)
+z = torch.all(x)
