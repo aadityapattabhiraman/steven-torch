@@ -52,3 +52,12 @@ points_t_cont = points_t.contiguous()
 
 points_gpu = torch.tensor([[4.0, 1.0], [5.0, 3.0], [2.0, 1.0]], device='cuda')
 points_gpu = points.to(device='cuda')
+
+points = torch.ones(3, 4)
+points_np = points.numpy()
+
+with open('ourpoints.t','wb') as f:
+torch.save(points, f)
+
+with open('ourpoints.t','rb') as f:
+points = torch.load(f)
