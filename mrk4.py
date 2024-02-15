@@ -23,7 +23,6 @@ class Convolutional_Neural_Network(nn.Module):
 		x = self.pool(x)
 		x = functional.relu(self.conv2(x))
 		x = self.pool(x)
-		x = x.reshape(x.shape[0], -1)
 		x = self.layer_1(x)
 		return x
 
@@ -79,6 +78,7 @@ def check_accuracy(loader, model):
 		for x, y in loader:
 			x = x.to(device=device)
 			y = y.to(device=device)
+			x = x.reshape(x.shape[0], -1)
 
 			scores = model(x)
 			_, predictions = scores.max(1)
