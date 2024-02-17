@@ -20,7 +20,7 @@ hidden_size = 256
 num_classes = 10
 learning_rate = 3e-4
 batch_size = 64
-num_epochs = 2
+num_epochs = 200
 
 # Create a bidirectional LSTM
 class BRNN(nn.Module):
